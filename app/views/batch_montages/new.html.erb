@@ -1,0 +1,4 @@
+<%= simple_form_for @batch_montage do |f| %>
+  <%= f.input :file, as: :file, label: "File to upload", hint: "csv format only" %>
+  <%= f.button :submit %>
+<% end %>
