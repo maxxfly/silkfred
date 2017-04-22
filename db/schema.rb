@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170422135710) do
+ActiveRecord::Schema.define(version: 20170422172734) do
 
   create_table "batch_montages", force: :cascade do |t|
-    t.string   "status"
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -39,9 +39,10 @@ ActiveRecord::Schema.define(version: 20170422135710) do
     t.string   "photo_url_1",      null: false
     t.string   "photo_url_2",      null: false
     t.integer  "batch_montage_id", null: false
-    t.string   "status",           null: false
+    t.integer  "status",           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "path"
   end
 
   add_index "montages", ["batch_montage_id"], name: "index_montages_on_batch_montage_id"

@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe MontageService do
   let(:path_fixture) {  Rails.root.join("spec", "fixtures", "files") }
 
-  let(:green_200) { Magick::ImageList.new(path_fixture.join('green_200.png') ) }
-  let(:green_300) { Magick::ImageList.new(path_fixture.join('green_300.png') ) }
-  let(:red_200)   { Magick::ImageList.new(path_fixture.join('red_200.png') ) }
-  let(:logo_50)   { Magick::ImageList.new(path_fixture.join('logo_50.png') ) }
-  let(:logo_500)  { Magick::ImageList.new(path_fixture.join('logo_500.png') ) }
+  let(:green_200) { Magick::ImageList.new(path_fixture.join('green_200.png')).first }
+  let(:green_300) { Magick::ImageList.new(path_fixture.join('green_300.png')).first }
+  let(:red_200)   { Magick::ImageList.new(path_fixture.join('red_200.png')).first }
+  let(:logo_50)   { Magick::ImageList.new(path_fixture.join('logo_50.png')).first }
+  let(:logo_500)  { Magick::ImageList.new(path_fixture.join('logo_500.png')).first }
 
   context "images have the same height" do
     let(:montage) { MontageService.new(image_1: green_200, image_2: red_200, logo: logo_50) }

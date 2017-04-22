@@ -9,6 +9,7 @@
 #  status           :string           not null
 #  created_at       :datetime
 #  updated_at       :datetime
+#  path             :string
 #
 
 class Montage <  ActiveRecord::Base
@@ -24,12 +25,23 @@ class Montage <  ActiveRecord::Base
 
     images = Magick::ImageList.new
 
+    # read image from http
     urlimage_1 = open(photo_url_1)
     urlimage_2 = open(photo_url_2)
-
     images.from_blob(urlimage_1.read)
     images.from_blob(urlimage_2.read)
 
-    Rails.logger.debug images.inspect
+    # read logo
+    logo = Magick::ImageList.new(Rails.root.join('app', 'assets', 'images', 'generic_logo.png'))
+
+    # launch service
+    montage_service = MontageService.new(image_1: images[0], image_2: images[1], logo: logo[0], margin: 20)
+    montage_service.assemble(Rails.root.join('public', 'photos', "montage_" + id.to_s + '.jpg'))
+
+    self.status = "done"
+    self.path = "photos/montage" + id.to_s + '.jpg'
+    self.save
+
+    self.batch_montage.check_status
   end
 end

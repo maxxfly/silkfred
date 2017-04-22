@@ -28,8 +28,8 @@ class MontageService
 
   def dimensions_images
     unless @dimensions_image
-      image_1_dimensions = [ @image_1.first.columns, @image_1.first.rows ]
-      image_2_dimensions = [ @image_2.first.columns, @image_2.first.rows ]
+      image_1_dimensions = [ @image_1.columns, @image_1.rows ]
+      image_2_dimensions = [ @image_2.columns, @image_2.rows ]
 
       if image_1_dimensions[1] != image_2_dimensions[1]
         dest_height = [image_1_dimensions[1], image_2_dimensions[1]].min
@@ -45,7 +45,7 @@ class MontageService
   end
 
   def dimensions_logo
-    dimensions_logo = [ @logo.first.columns, @logo.first.rows ]
+    dimensions_logo = [ @logo.columns, @logo.rows ]
 
     max_width = dimensions_images[1][0] / 2
 
