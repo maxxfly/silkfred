@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170422172734) do
+ActiveRecord::Schema.define(version: 20170422190835) do
 
   create_table "batch_montages", force: :cascade do |t|
     t.integer  "status"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170422172734) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "path"
+    t.text     "base64"
   end
 
   add_index "montages", ["batch_montage_id"], name: "index_montages_on_batch_montage_id"
