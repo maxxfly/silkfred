@@ -18,7 +18,7 @@ class BatchMontage <  ActiveRecord::Base
 
   def process_batch
     montages.todo.each do |montage|
-      MontageWorker.perform_async(montage.id)
+      montage.delay.perform
     end
   end
 end
