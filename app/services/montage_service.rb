@@ -6,6 +6,26 @@ class MontageService
     @margin = params[:margin] || 0
   end
 
+  def assemble(path=nil)
+    canvas = Magick::ImageList.new
+    canvas.new_image(dimension_montage[0], dimension_montage[1]) { self.background_color = "white" }
+
+    @image_1.scale!(dimensions_images[0][0], dimensions_images[0][1])
+    @image_2.scale!(dimensions_images[1][0], dimensions_images[1][1])
+
+    @logo.scale!(dimensions_logo[0], dimensions_logo[1])
+
+    canvas.composite!(@image_1, Magick::NorthWestGravity, @margin, @margin, Magick::AtopCompositeOp)
+    canvas.composite!(@image_2, Magick::NorthEastGravity, @margin, @margin, Magick::AtopCompositeOp)
+    canvas.composite!(@logo,    Magick::SouthEastGravity, @margin, @margin, Magick::AtopCompositeOp)
+
+    if path
+      canvas.write(path)
+    else
+      canvas
+    end
+  end
+
   def dimensions_images
     unless @dimensions_image
       image_1_dimensions = [ @image_1.first.columns, @image_1.first.rows ]
