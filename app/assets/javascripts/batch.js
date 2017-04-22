@@ -6,7 +6,7 @@ function get_percentage(batch_id)
       $('#percentage').text(data.percentage);
       if(data.status == "done")
       {
-        window.refresh();
+        location.reload();
       }
       else
       {

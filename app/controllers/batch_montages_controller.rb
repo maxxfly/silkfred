@@ -28,6 +28,10 @@ class BatchMontagesController < ApplicationController
         render json: @batch_montage.to_json
       end
 
+      format.csv do
+        send_data @batch_montage.to_csv, file_name: "export.csv"
+      end
+
       format.html do
         render
       end

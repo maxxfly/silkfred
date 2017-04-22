@@ -39,7 +39,7 @@ class Montage <  ActiveRecord::Base
     montage_service.assemble(Rails.root.join('public', 'photos', "montage_" + id.to_s + '.jpg'))
 
     self.status = "done"
-    self.path = "photos/montage" + id.to_s + '.jpg'
+    self.path = HOST + "/photos/montage_" + id.to_s + '.jpg'
     self.save
 
     self.batch_montage.check_status

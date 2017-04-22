@@ -34,4 +34,14 @@ class BatchMontage <  ActiveRecord::Base
   def to_json
     {id: id, percentage: percentage, status: status}
   end
+
+  def to_csv
+    require 'csv'
+    
+    CSV.generate do |csv|
+      montages.all.each do |montage|
+        csv << [montage.path]
+      end
+    end
+  end
 end

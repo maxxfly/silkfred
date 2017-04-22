@@ -11,5 +11,10 @@
 <% else %>
   <div>
     DONE :
+    <%= link_to "Download CSV",
+      batch_montage_path(@batch_montage, format: :csv)
+     %>
+    <br/><br/>
+    <%= link_to "Launch a new batch", "/" %>
   </div>
 <% end %>
