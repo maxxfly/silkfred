@@ -22,7 +22,16 @@ class BatchMontagesController < ApplicationController
   end
 
   def show
-    @batch_montage.find(params[:id])
+    @batch_montage = BatchMontage.find(params[:id])
+    respond_to do |format|
+      format.json do
+        render json: @batch_montage.to_json
+      end
+
+      format.html do
+        render
+      end
+    end
   end
 
 

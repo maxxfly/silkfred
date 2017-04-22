@@ -1,1 +1,15 @@
-Panda
+<br/>
+
+<% if @batch_montage.todo? %>
+  <div>
+    Progression: <span id="percentage"></span>%
+  </div>
+
+  <script>
+    get_percentage(<%= @batch_montage.id %>);
+  </script>
+<% else %>
+  <div>
+    DONE :
+  </div>
+<% end %>

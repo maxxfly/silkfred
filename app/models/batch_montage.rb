@@ -26,4 +26,12 @@ class BatchMontage <  ActiveRecord::Base
       self.save
     end
   end
+
+  def percentage
+    ((montages.done.count / montages.count.to_f) * 100).round
+  end
+
+  def to_json
+    {id: id, percentage: percentage, status: status}
+  end
 end
