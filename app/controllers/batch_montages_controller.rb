@@ -8,8 +8,8 @@ class BatchMontagesController < ApplicationController
     require 'csv'
     @batch_montage = BatchMontage.new(status: "todo")
 
-    if params[:batch_montage][:file]
-      CSV.foreach(params[:batch_montage][:file].path) do |row|
+    if params[:file]
+      CSV.foreach(params[:file].path) do |row|
         @batch_montage.montages.build( photo_url_1: row[0],
                                        photo_url_2: row[1],
                                        status: "todo" )
@@ -22,6 +22,7 @@ class BatchMontagesController < ApplicationController
   end
 
   def show
+    @batch_montage.find(params[:id])
   end
 
 

@@ -1,4 +1,6 @@
-<%= simple_form_for @batch_montage do |f| %>
-  <%= f.input :file, as: :file, label: "File to upload", hint: "csv format only" %>
-  <%= f.button :submit %>
+<br/>
+<%= form_tag(batch_montages_path, multipart: true) do %>
+  <%= label_tag :file, 'File to send' %>
+  <%= file_field_tag :file, as: :file %><br/>
+  <%= submit_tag 'Send' %>
 <% end %>

@@ -33,7 +33,6 @@ gem 'rmagick'       # Ruby bindings for ImageMagick
 gem 'delayed_job_active_record'
 
 gem 'bootstrap', '~> 4.0.0.alpha6'
-gem 'simple_form'
 
 gem 'rails_12factor', group: :production
 
