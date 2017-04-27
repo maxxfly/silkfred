@@ -9,7 +9,17 @@ class BatchMontagesController < ApplicationController
     @batch_montage = BatchMontage.new(status: "todo")
 
     if params[:file]
-      CSV.foreach(params[:file].path) do |row|
+      content_file = File.read(params[:file].path)
+
+      if content_file.index(';')
+        separator = ';'
+      elsif  content_file.index("\t")
+        separator = "\t"
+      else
+        separator = ','
+      end
+
+      CSV.parse(content_file, {:col_sep => separator}) do |row|
         @batch_montage.montages.build( photo_url_1: row[0],
                                        photo_url_2: row[1],
                                        status: "todo" )
