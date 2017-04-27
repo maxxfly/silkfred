@@ -19,15 +19,21 @@ class BatchMontagesController < ApplicationController
         separator = ','
       end
 
-      CSV.parse(content_file, {:col_sep => separator}) do |row|
-        @batch_montage.montages.build( photo_url_1: row[0],
-                                       photo_url_2: row[1],
-                                       status: "todo" )
+      begin
+        CSV.parse(content_file, {:col_sep => separator}) do |row|
+          @batch_montage.montages.build( photo_url_1: row[0],
+                                         photo_url_2: row[1],
+                                         status: "todo" )
+        end
+
+        @batch_montage.save
+        flash[:error] = nil
+        redirect_to batch_montage_url(@batch_montage)
+      rescue
+        flash[:error] = "Can't parse the CSV file"
+        render :new
       end
 
-      @batch_montage.save
-
-      redirect_to batch_montage_url(@batch_montage)
     end
   end
 
